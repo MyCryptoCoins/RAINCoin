@@ -122,6 +122,11 @@ OBJS= \
 
 all: RainbowGoldCoind
 
+RainbowGoldCoind::	obj
+
+obj:
+	mkdir -p $@
+
 # auto-generated dependencies:
 -include obj/*.P
 -include obj-test/*.P
@@ -141,7 +146,7 @@ obj/%.o: %.cpp
 	      -e '/^$$/ d' -e 's/$$/ :/' < $(@:%.o=%.d) >> $(@:%.o=%.P); \
 	  rm -f $(@:%.o=%.d)
 
-RainbowGoldCoind: $(OBJS:obj/%=obj/%)
+RainbowGoldCoind:: $(OBJS:obj/%=obj/%)
 	$(CXX) $(xCXXFLAGS) -o $@ $^ $(xLDFLAGS) $(LIBS)
 
 TESTOBJS := $(patsubst test/%.cpp,obj-test/%.o,$(wildcard test/*.cpp))

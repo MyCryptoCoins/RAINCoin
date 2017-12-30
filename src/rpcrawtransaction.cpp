@@ -261,12 +261,12 @@ Value decoderawtransaction(const Array& params, bool fHelp)
     vector<unsigned char> txData(ParseHex(params[0].get_str()));
     CDataStream ssData(txData, SER_NETWORK, PROTOCOL_VERSION);
     CTransaction tx;
-    try {
+//    try {
         ssData >> tx;
-    }
-    catch (std::exception &e) {
-        throw JSONRPCError(-22, "TX decode failed");
-    }
+//    }
+//    catch (std::exception &e) {
+//        throw JSONRPCError(-22, "TX decode failed");
+//    }
 
     Object result;
     TxToJSON(tx, 0, result);
